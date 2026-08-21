@@ -1,0 +1,25 @@
+# <project>
+
+<One line: what this is and who uses it.>
+
+## Commands
+- Install: `<pnpm install>`
+- Dev: `<pnpm dev>`
+- Test: `<pnpm test>` — a single file: `<pnpm test path/to/file>`
+- Typecheck: `<pnpm typecheck>`
+- Lint/format: `<pnpm lint>` / `<pnpm format>`
+
+## Layout
+- `<src/>` — <what lives here>
+- `<apps/*>`, `<packages/*>` — <monorepo shape, if any>
+
+## Conventions
+- <Module system, import aliases, barrel-file policy>
+- <State management / data-fetching pattern>
+- <Test framework and where tests live>
+
+## Rules
+- Never commit without a green test run.
+- One concern per commit.
+- Match surrounding style; no drive-by refactors or reformatting.
+- <Anything that has bitten you before — put it here, it saves the most time>

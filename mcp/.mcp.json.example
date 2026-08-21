@@ -1,0 +1,19 @@
+{
+  "_comment": [
+    "Copy to a project root as .mcp.json and delete what you do not need.",
+    "Add MCP servers for things with NO good CLI. Skip the GitHub MCP server:",
+    "`gh` is already authenticated and costs zero context, while an MCP server",
+    "injects its whole tool list into every session."
+  ],
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": { "DATABASE_URL": "${DATABASE_URL}" }
+    }
+  }
+}

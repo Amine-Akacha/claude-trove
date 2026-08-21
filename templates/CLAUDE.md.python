@@ -1,0 +1,25 @@
+# <project>
+
+<One line: what this is and who uses it.>
+
+## Commands
+- Install: `<uv sync>` / `<pip install -r requirements.txt>`
+- Run: `<uv run python -m app>`
+- Test: `<uv run pytest -q>` — a single test: `<uv run pytest path::test_name>`
+- Lint/format: `<uv run ruff check --fix .>` / `<uv run ruff format .>`
+- Types: `<uv run mypy .>`
+
+## Layout
+- `<app/>` — <what lives here>
+- `<tests/>` — <structure, fixtures>
+
+## Conventions
+- Python <3.12>; <virtualenv location, how it is activated>
+- <Async or sync? Which web framework?>
+- <Settings/config loading, where env vars are read>
+
+## Rules
+- Never commit without a green test run.
+- One concern per commit.
+- Do not add dependencies without saying why.
+- <Anything that has bitten you before>
