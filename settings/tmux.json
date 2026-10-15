@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "__TROVE__/tmux/claude-tmux-status.sh working" }] }
+    ],
+    "PostToolUse": [
+      { "hooks": [{ "type": "command", "command": "__TROVE__/tmux/claude-tmux-status.sh working" }] }
+    ],
+    "Stop": [
+      { "hooks": [{ "type": "command", "command": "__TROVE__/tmux/claude-tmux-status.sh done" }] }
+    ],
+    "Notification": [
+      { "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [{ "type": "command", "command": "__TROVE__/tmux/claude-tmux-status.sh waiting" }] }
+    ]
+  }
+}
