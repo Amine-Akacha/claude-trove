@@ -106,6 +106,23 @@ Hook it into tmux with one line in `~/.tmux.conf`:
 source-file -q ~/.claude/claude.tmux
 ```
 
+How the state gets there: the hooks call `claude-tmux-status.sh <state>`, which
+stores it as tmux window options that the popups and status bar read
+(`@claude_state`, `@claude_repo`, and `@claude_pr`, the branch's PR looked up
+with `gh pr view` in the background).
+
+| Hook event | Matcher | State |
+|---|---|---|
+| `UserPromptSubmit` | – | `working` |
+| `PostToolUse` | – | `working` (clears `❗` once you approve a permission prompt) |
+| `Stop` | – | `done` |
+| `Notification` | `permission_prompt\|elicitation_dialog` | `waiting` (the 60s idle notice is excluded so it doesn't flip `✅` back to `❗`) |
+
+On WSL there's no `xdg-open`, so URLs go through `wslview` or `explorer.exe`,
+and the toast uses the WinRT API built into `powershell.exe`. PowerShell takes
+about a second to start, so the toast runs in the background and never slows
+Claude down.
+
 Optional theming: put `#(~/.claude/bin/claude-tmux-counts.sh)` in
 `status-right` for a `❗2 ✅1` counter, and color it with the
 `@claude-waiting-style` / `@claude-done-style` options. `tmux/claude.tmux` has
