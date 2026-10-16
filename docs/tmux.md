@@ -36,18 +36,28 @@ On WSL, `wslu` (for `wslview`) is optional: links fall back to `explorer.exe`.
 ```bash
 git clone https://github.com/FucciUnavailable/claude-trove.git ~/repos/claude-trove
 cd ~/repos/claude-trove
-./install.sh --dry-run tmux    # see what it will change first
-./install.sh tmux
+./install.sh --dry-run tmux statusline    # see what it will change first
+./install.sh tmux statusline
 ```
 
-Run it with only `tmux` to get just this integration, or with no arguments to also
-get the skills, hooks and status line (see the [README](../README.md)).
+`statusline` is the line under Claude Code's prompt:
+
+```
+Opus 5.5 high │ ██████░░░░ 62% 124k/200k │ $1.37 │ 5h 22% · 7d 8% │ 1h13m │ +120 −34 │ repo ⎇ branch* │ PR #3
+```
+
+It shows the model and effort, how full the context window is, the session cost
+and your plan usage, plus the branch and its PR. It isn't required for the tmux
+integration: drop it from the command if you don't want it. If you already have
+a status line of your own, the installer leaves yours alone. Run `./install.sh`
+with no arguments to also get the skills and core hooks (see the
+[README](../README.md)).
 
 What it does:
 
 - Symlinks the scripts into `~/.claude/bin/` and `claude.tmux` into `~/.claude/`.
   Because these are symlinks, a `git pull` updates them.
-- Adds four hooks to `~/.claude/settings.json`. Your existing settings are kept,
+- Adds four hooks (and the `statusLine` setting) to `~/.claude/settings.json`. Your existing settings are kept,
   a timestamped backup is written first, and re-running doesn't add duplicates.
 
 ## 2. Hook it into tmux
