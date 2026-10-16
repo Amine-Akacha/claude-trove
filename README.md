@@ -1,7 +1,11 @@
 # claude-trove
 
-Personal Claude Code configuration: skills, hooks, permissions, and templates,
-in one repo so a new machine is one `git clone` away from a working setup.
+Claude Code configuration: skills, hooks, a status line, a tmux integration,
+permissions and templates. It's all in one repo, so a new machine is one
+`git clone` away from a working setup. Install all of it, or only the modules
+you want.
+
+**Here for the tmux integration?** See the [setup guide](docs/tmux.md).
 
 ```bash
 ./install.sh                     # the default modules
@@ -89,6 +93,8 @@ the 5h/7d numbers are the limits that matter.
 
 ## tmux
 
+Full walkthrough, theming and troubleshooting: **[docs/tmux.md](docs/tmux.md)**.
+
 Every window running Claude is renamed `⏳ repo:branch` (working), `✅` (done) or
 `❗` (waiting on you), and you get a desktop notification when a session
 finishes or needs input: a Windows toast on WSL, Notification Center on macOS,
@@ -105,6 +111,8 @@ Hook it into tmux with one line in `~/.tmux.conf`:
 ```tmux
 source-file -q ~/.claude/claude.tmux
 ```
+
+To use other keys, set `@claude-board-key` / `@claude-prs-key` before that line.
 
 How the state gets there: the hooks call `claude-tmux-status.sh <state>`, which
 stores it as tmux window options that the popups and status bar read
@@ -130,7 +138,7 @@ the details.
 
 ## Permissions
 
-`settings/settings.json` allowlists read-only git/gh/search commands and the
+`settings/core.json` allowlists read-only git/gh/search commands and the
 standard test runners, so they stop prompting. Denies force-push, hard reset,
 and reads of `.env` / private keys.
 
@@ -156,6 +164,7 @@ hooks/run-tests.sh       Stop: background verification run
 hooks/branch-guard.sh    PreToolUse: warn before editing on the default branch
 hooks/pr-nudge.sh        Stop: open a PR once a change is big (opt-in)
 statusline/statusline.sh the status line
+docs/tmux.md             tmux setup guide
 tmux/                    hook + popup scripts (linked into ~/.claude/bin) and claude.tmux
 lib/platform.sh          open a URL / send a notification on WSL, macOS or Linux
 settings/<module>.json   each module's hooks/permissions, merged by install.sh (__TROVE__ = repo path)
