@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__TROVE__/hooks/pr-nudge.sh",
+            "timeout": 60,
+            "asyncRewake": true,
+            "rewakeSummary": "Open a PR for this change",
+            "statusMessage": "Checking PR size…"
+          }
+        ]
+      }
+    ]
+  }
+}
