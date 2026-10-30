@@ -5,6 +5,8 @@ permissions and templates. It's all in one repo, so a new machine is one
 `git clone` away from a working setup. Install all of it, or only the modules
 you want.
 
+![Claude Code in tmux: windows marked done, the status line under the prompt, and a "Claude Code finished" desktop notification](docs/img/tmux-session.png)
+
 **Here for the tmux integration?** See the [setup guide](docs/tmux.md).
 
 ```bash
@@ -106,6 +108,14 @@ outside tmux too.
 | `prefix + C` | Session board: every Claude window, waiting first. `Enter` jumps there, `Ctrl-O` opens its PR. |
 | `prefix + P` | All your open PRs across repos. `Enter` opens one in the browser. |
 
+**Session board** (`prefix + C`)
+
+![Session board popup listing three Claude windows by state and repo:branch](docs/img/session-board.png)
+
+**Open PRs** (`prefix + P`)
+
+![Open PRs popup listing pull requests across several repos](docs/img/open-prs.png)
+
 Hook it into tmux with one line in `~/.tmux.conf`:
 
 ```tmux
@@ -165,6 +175,7 @@ hooks/branch-guard.sh    PreToolUse: warn before editing on the default branch
 hooks/pr-nudge.sh        Stop: open a PR once a change is big (opt-in)
 statusline/statusline.sh the status line
 docs/tmux.md             tmux setup guide
+docs/img/                README screenshots
 tmux/                    hook + popup scripts (linked into ~/.claude/bin) and claude.tmux
 lib/platform.sh          open a URL / send a notification on WSL, macOS or Linux
 settings/<module>.json   each module's hooks/permissions, merged by install.sh (__TROVE__ = repo path)
