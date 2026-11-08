@@ -24,6 +24,12 @@ if ! command -v fzf >/dev/null; then
   exit 0
 fi
 
+# fzf renders tabs as 8-column stops, so a long repo#number shifts the rest of
+# its row. Pad the first column to the widest one to keep the columns aligned.
+prs=$(printf '%s\n' "$prs" | awk -F'\t' -v OFS='\t' '
+  { row[NR] = $0; if (length($1) > w) w = length($1) }
+  END { for (i = 1; i <= NR; i++) { $0 = row[i]; $1 = sprintf("%-" w "s", $1); print } }')
+
 url=$(printf '%s\n' "$prs" | fzf --delimiter='\t' --with-nth=1..3 \
   --header='Enter: open PR   Esc: close' --reverse | cut -f4)
 
